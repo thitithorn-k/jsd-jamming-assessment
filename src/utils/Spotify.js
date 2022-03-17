@@ -1,8 +1,10 @@
 // TODO: Get Client ID from https://developer.spotify.com/dashboard/ and put it here
 const clientId = 'c2238da65efd474f8633bf15a7249ce4';
 
-const redirectUri = 'http://localhost:3000/';
-const spotifyUrl = `https://accounts.spotify.com/authorize?response_type=token&scope=playlist-modify-public&client_id=${clientId}&redirect_uri=${redirectUri}`;
+// const redirectUri = 'http://localhost:3000/';
+const redirectUri = 'https://non-jsd-jamming-assessment.vercel.app/';
+
+// const spotifyUrl = `https://accounts.spotify.com/authorize?response_type=token&scope=playlist-modify-public&client_id=${clientId}&redirect_uri=${redirectUri}`;
 let accessToken = undefined;
 let expiresIn = undefined;
 
@@ -11,6 +13,7 @@ const Spotify = {
     if (accessToken) {
       return accessToken;
     }
+
     const urlAccessToken = window.location.href.match(/access_token=([^&]*)/);
     const urlExpiresIn = window.location.href.match(/expires_in=([^&]*)/);
     if (urlAccessToken && urlExpiresIn) {
@@ -19,6 +22,8 @@ const Spotify = {
       window.setTimeout(() => (accessToken = ''), expiresIn * 1000);
       window.history.pushState('Access Token', null, '/');
     } else {
+      const customClientId = prompt('Enter your Spotify Client ID (Please add \'https://non-jsd-1-react-jamming.vercel.app/\' to your Redirect URIs in Spotify Dev app', clientId);
+      const spotifyUrl = `https://accounts.spotify.com/authorize?response_type=token&scope=playlist-modify-public&client_id=${customClientId}&redirect_uri=${redirectUri}`;
       window.location = spotifyUrl;
     }
   },
