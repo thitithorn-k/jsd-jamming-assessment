@@ -8,7 +8,6 @@ import Playlist from '../Playlist/Playlist';
 import Spotify from '../../utils/Spotify';
 
 function App() {
-
   Spotify.getAccessToken();
 
   const [searchResults, setSearchResults] = useState([]);
@@ -16,7 +15,7 @@ function App() {
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
-  function addTrack(track) {
+  const addTrack = (track) => {
     const foundInPlaylist = playlistTracks.find(playlistTrack => playlistTrack.id === track.id);
     if(foundInPlaylist) return;
     setPlaylistTracks((prev) => [
@@ -34,11 +33,8 @@ function App() {
   }
 
   const savePlaylist = () => {
-    console.log('save to spotify!');
     const trackIds = playlistTracks.map((track) => track.id)
-    console.log(trackIds);
-
-    Spotify.savePlaylist(playlistName? playlistName: 'New playlist', trackIds).then((res) => console.log(res));
+    Spotify.savePlaylist(playlistName? playlistName: 'New playlist', trackIds).then(setPlaylistTracks([]));
   }
 
   const updateTerm = (newTerm) => {
