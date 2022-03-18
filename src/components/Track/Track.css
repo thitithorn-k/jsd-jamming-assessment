@@ -1,6 +1,7 @@
 .Track {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   border-bottom: 1px solid rgba(256, 256, 256, 0.8);
 }
 
@@ -16,6 +17,19 @@
 
 .Track-action:hover {
   color: rgba(265, 265, 265, .5);
+}
+
+.Track-detail {
+  display: flex;
+  align-items: center;
+  max-width: 95%;
+  overflow: hidden;
+  height: 72px;
+}
+
+.Track-detail img {
+  width: 60px;
+  height: 60px;
 }
 
 .Track-information {
