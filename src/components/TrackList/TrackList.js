@@ -9,6 +9,7 @@ function TrackList(props) {
       onAdd={props.onAdd}
       onRemove={props.onRemove}
       isRemoval={props.isRemoval}
+      maxWidth={props.maxWidth}
     />
   ));
 
