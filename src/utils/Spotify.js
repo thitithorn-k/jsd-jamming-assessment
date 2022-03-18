@@ -35,6 +35,7 @@ const Spotify = {
       .then((response) => response.json())
       .then((jsonResponse) => {
         if (!jsonResponse.tracks) return [];
+        // console.log(jsonResponse);
         return jsonResponse.tracks.items.map((track) => {
           return {
             id: track.id,
@@ -42,6 +43,7 @@ const Spotify = {
             artist: track.artists[0].name,
             album: track.album.name,
             uri: track.uri,
+            images: track.album.images
           };
         });
       });
@@ -78,6 +80,21 @@ const Spotify = {
       }
     }
   },
+
+  async getAllPlaylist() {
+    const getPlaylistUrl = `https://api.spotify.com/v1/me/playlists`;
+    return fetch(getPlaylistUrl, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((jsonResponse) => {
+        if (!jsonResponse) return [];
+        return jsonResponse;
+      });
+  },
+
 };
 
 export default Spotify;
