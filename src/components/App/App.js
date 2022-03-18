@@ -22,10 +22,19 @@ function App() {
       ...prev,
       track
     ]);
+    setSearchResults((prev) => prev.filter((prev_track) => prev_track.id != track.id));
   }
 
   const removeTrack = (track) => {
     setPlaylistTracks((prev) => prev.filter((prev_track) => prev_track.id !== track.id));
+
+    const addTop = searchResults.filter((searchTrack) => searchTrack.localIndex < track.localIndex);
+    const addBottom = searchResults.filter((searchTrack) => searchTrack.localIndex > track.localIndex);
+    setSearchResults([
+      ...addTop,
+      track,
+      ...addBottom
+    ])
   }
 
   const updatePlaylistName = (newName) => {

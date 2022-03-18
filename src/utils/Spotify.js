@@ -35,9 +35,12 @@ const Spotify = {
       .then((response) => response.json())
       .then((jsonResponse) => {
         if (!jsonResponse.tracks) return [];
-        console.log(jsonResponse);
+        let index = 0;
         return jsonResponse.tracks.items.map((track) => {
+          const thisIndex = index;
+          index++;
           return {
+            localIndex: thisIndex,
             id: track.id,
             name: track.name,
             artist: track.artists[0].name,
